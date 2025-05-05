@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Currency System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+    }
+
+    header, footer {
+      background-color: #111;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #1a1a1a;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav a, .auth-btn {
+      color: #4ade80;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    .auth-btn {
+      float: right;
+      margin-right: 20px;
+      background-color: #333;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    section {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #4ade80;
+    }
+
+    .feature-card {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0 0 10px #222;
+    }
+
+    .feature-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .three-d-animation {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .three-d-animation iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    .converter {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .converter select, .converter input, .converter button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .converter button {
+      background-color: #4ade80;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Multi-Currency System</h1>
+    <a href="#" class="auth-btn">Login</a>
+    <a href="#" class="auth-btn">Signup</a>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to the Future of Global Finance</h2>
+    <p style="text-align:center; max-width:700px; margin:auto">Manage currencies with real-time rates, smart forecasting, historical charts, and complete investment tracking. Built for global finance with security, flexibility, and speed.</p>
+  </section>
+
+  <section class="three-d-animation">
+    <h2>Interactive 3D Model</h2>
+    <iframe src="https://my.spline.design/cryptodashboard-abcdef1234567890/embed" allowfullscreen></iframe>
+  </section>
+
+  <section id="features">
+    <h2>Core Features</h2>
+    <div class="feature-card">
+      <img src="images/currency-support.png" alt="Multi Currency">
+      <h3>Multi-Currency Support</h3>
+      <p>Handle multiple currencies (INR, USD, EUR, JPY, etc.) with dynamic addition and formatting.</p>
+    </div>
+    <div class="feature-card">
+      <img src="images/forecasting.png" alt="Forecasting">
+      <h3>Currency Value Forecasting</h3>
+      <p>AI/ML-based predictive analytics for currency trends and future values.</p>
+    </div>
+    <div class="feature-card">
+      <img src="images/history.png" alt="History">
+      <h3>Historical Data & Charts</h3>
+      <p>Track exchange rate history and visualize trends over time (7d, 30d, 1y).</p>
+    </div>
+  </section>
+
+  <section class="converter">
+    <h2>Currency Converter</h2>
+    <input type="number" id="amount" placeholder="Enter amount" />
+    <br />
+    <select id="from">
+      <option value="INR">INR</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+      <option value="AUD">AUD</option>
+    </select>
+    <select id="to">
+      <option value="USD">USD</option>
+      <option value="INR">INR</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="JPY">JPY</option>
+      <option value="AUD">AUD</option>
+    </select>
+    <br />
+    <button onclick="convertCurrency()">Convert</button>
+    <button onclick="buyCurrency()">Buy</button>
+    <button onclick="sellCurrency()">Sell</button>
+    <div class="result" id="result"></div>
+  </section>
+
+  <section>
+    <h2>Crypto Market News</h2>
+    <iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=dark&cnt=10&pref_coin_id=1505" height="500"></iframe>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p style="text-align:center; max-width:700px; margin:auto">We are a team of passionate developers and finance experts building tools that simplify global currency management for individuals and businesses. Our mission is to democratize access to currency data and insights.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p style="text-align:center; max-width:700px; margin:auto">Email: support@currencydashboard.com | Phone: +91-9876543210</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Multi-Currency System. All rights reserved.
+  </footer>
+
+  <script>
+    const exchangeRates = {
+      INR: { USD: 0.012, EUR: 0.011, GBP: 0.0096, JPY: 1.7, AUD: 0.018 },
+      USD: { INR: 83, EUR: 0.91, GBP: 0.80, JPY: 139, AUD: 1.52 },
+      EUR: { INR: 91, USD: 1.1, GBP: 0.88, JPY: 151, AUD: 1.66 },
+      GBP: { INR: 105, USD: 1.25, EUR: 1.14, JPY: 172, AUD: 1.88 },
+      JPY: { INR: 0.58, USD: 0.0072, EUR: 0.0066, GBP: 0.0058, AUD: 0.011 },
+      AUD: { INR: 55, USD: 0.66, EUR: 0.60, GBP: 0.53, JPY: 90 }
+    };
+
+    function convertCurrency() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      const resultEl = document.getElementById('result');
+
+      if (!amount || from === to) {
+        resultEl.innerText = "Please enter a valid amount and choose different currencies.";
+        return;
+      }
+
+      const rate = exchangeRates[from][to];
+      const converted = amount * rate;
+      resultEl.innerText = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
+    }
+
+    function buyCurrency() {
+      const to = document.getElementById('to').value;
+      alert(`Currency bought successfully in ${to}`);
+    }
+
+    function sellCurrency() {
+      const from = document.getElementById('from').value;
+      alert(`Currency sold successfully in ${from}`);
+    }
+  </script>
+</body>
+
+</html>
