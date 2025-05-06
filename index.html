@@ -105,11 +105,27 @@
       background-color: #4ade80;
       cursor: pointer;
       font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .converter button:hover {
+      background-color: #3ac169;
     }
 
     .result {
       margin-top: 20px;
       font-size: 1.2rem;
+    }
+
+    .rate-info {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -133,35 +149,11 @@
     <p style="text-align:center; max-width:700px; margin:auto">Manage currencies with real-time rates, smart forecasting, historical charts, and complete investment tracking. Built for global finance with security, flexibility, and speed.</p>
   </section>
 
-  <section class="three-d-animation">
-    <h2>Interactive 3D Model</h2>
-    <iframe src="https://my.spline.design/cryptodashboard/embed" allowfullscreen></iframe>
-  </section>
-
-  <section id="features">
-    <h2>Core Features</h2>
-    <div class="feature-card">
-      <img src="https://via.placeholder.com/800x400?text=Multi+Currency" alt="Multi Currency">
-      <h3>Multi-Currency Support</h3>
-      <p>Handle multiple currencies (INR, USD, EUR, JPY, etc.) with dynamic addition and formatting.</p>
-    </div>
-    <div class="feature-card">
-      <img src="https://via.placeholder.com/800x400?text=Forecasting" alt="Forecasting">
-      <h3>Currency Value Forecasting</h3>
-      <p>AI/ML-based predictive analytics for currency trends and future values.</p>
-    </div>
-    <div class="feature-card">
-      <img src="https://via.placeholder.com/800x400?text=History" alt="History">
-      <h3>Historical Data & Charts</h3>
-      <p>Track exchange rate history and visualize trends over time (7d, 30d, 1y).</p>
-    </div>
-  </section>
-
   <section class="converter">
     <h2>Currency Converter</h2>
-    <input type="number" id="amount" placeholder="Enter amount" />
+    <input type="number" id="amount" placeholder="Enter amount" oninput="convertCurrency()" />
     <br />
-    <select id="from">
+    <select id="from" onchange="convertCurrency()">
       <option value="INR">INR</option>
       <option value="USD">USD</option>
       <option value="EUR">EUR</option>
@@ -169,7 +161,7 @@
       <option value="JPY">JPY</option>
       <option value="AUD">AUD</option>
     </select>
-    <select id="to">
+    <select id="to" onchange="convertCurrency()">
       <option value="USD">USD</option>
       <option value="INR">INR</option>
       <option value="EUR">EUR</option>
@@ -178,25 +170,9 @@
       <option value="AUD">AUD</option>
     </select>
     <br />
-    <button onclick="convertCurrency()">Convert</button>
-    <button onclick="buyCurrency()">Buy</button>
-    <button onclick="sellCurrency()">Sell</button>
-    <div class="result" id="result"></div>
-  </section>
-
-  <section>
-    <h2>Crypto Market News</h2>
-    <iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=dark&cnt=10&pref_coin_id=1505" height="500"></iframe>
-  </section>
-
-  <section id="about">
-    <h2>About Us</h2>
-    <p style="text-align:center; max-width:700px; margin:auto">We are a team of passionate developers and finance experts building tools that simplify global currency management for individuals and businesses. Our mission is to democratize access to currency data and insights.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p style="text-align:center; max-width:700px; margin:auto">Email: support@currencydashboard.com | Phone: +91-9876543210</p>
+    <div class="result" id="result">Result will appear here.</div>
+    <div class="rate-info" id="rate-info"></div>
+    <div class="error-message" id="error-message"></div>
   </section>
 
   <footer>
@@ -218,25 +194,29 @@
       const from = document.getElementById('from').value;
       const to = document.getElementById('to').value;
       const resultEl = document.getElementById('result');
+      const rateInfoEl = document.getElementById('rate-info');
+      const errorMessageEl = document.getElementById('error-message');
 
-      if (!amount || from === to) {
-        resultEl.innerText = "Please enter a valid amount and choose different currencies.";
+      // Clear previous messages
+      errorMessageEl.innerText = '';
+      rateInfoEl.innerText = '';
+      resultEl.innerText = '';
+
+      if (!amount || amount <= 0) {
+        errorMessageEl.innerText = 'Please enter a valid amount.';
+        return;
+      }
+
+      if (from === to) {
+        errorMessageEl.innerText = 'Please select different currencies.';
         return;
       }
 
       const rate = exchangeRates[from][to];
       const converted = amount * rate;
+
       resultEl.innerText = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
-    }
-
-    function buyCurrency() {
-      const to = document.getElementById('to').value;
-      alert(`Currency bought successfully in ${to}`);
-    }
-
-    function sellCurrency() {
-      const from = document.getElementById('from').value;
-      alert(`Currency sold successfully in ${from}`);
+      rateInfoEl.innerText = `Exchange Rate: 1 ${from} = ${rate} ${to}`;
     }
   </script>
 </body>
